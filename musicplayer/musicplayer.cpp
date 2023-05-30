@@ -2,7 +2,6 @@
 #include "musicplayer.h"
 #include <vector>
 
-Serial pc(USBTX,USBRX);
 enum noteNames {C, Cs, D, Eb, E, F, Fs, G, Gs, A, Bb, B};
 float NT[12][9] = { 
     {16.35}, {17.32}, {18.35}, {19.45}, {20.60}, {21.83},    
@@ -35,10 +34,8 @@ void musicplayer::selectSong(int song) {
 void musicplayer::play(vector<float> notes, int tempo, float speed) {
     int divider = 0, noteDuration = 0;
     int wholenote = 60000 * 4 / tempo;
-    pc.printf("Size: %d", notes.size());
     for (int i = 0; i < notes.size()/2; i+=2) {
         divider = notes[i+1];
-        pc.printf("Note: %f", notes[i]);
         if(divider > 0) {
             noteDuration = wholenote/divider;
         }
