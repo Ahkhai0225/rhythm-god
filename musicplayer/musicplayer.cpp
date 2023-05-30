@@ -82,7 +82,7 @@ void musicplayer::playHarryPotter() {
         NT[Eb][4], 2, NT[B][3], 4,
         NT[Eb][4], -4, NT[D][4], 8, NT[Cs][4], 4,
         NT[Cs][3], 2, NT[Bb][3], 4,
-        NT[G][3], -1
+        NT[G][3], -1, 0, 4
     };
     play(harryPotter, 157, 0.1);
 }
@@ -107,7 +107,7 @@ void musicplayer::playStarWars() {
         NT[A][2], 8, NT[Gs][2], 4, NT[G][2], 4,
         NT[Fs][2], 2, NT[F][2], 2, NT[Fs][2], 2,
         NT[Bb][1], 2, NT[Eb][2], 8, NT[D][2], 4,
-        NT[Cs][2], 4
+        NT[Cs][2], 4, 0, 4
     };
     play(starWars, 91, 0.1);
 }
