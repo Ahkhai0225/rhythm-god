@@ -34,7 +34,7 @@ void musicplayer::selectSong(int song) {
 void musicplayer::play(vector<float> notes, int tempo, float speed) {
     int divider = 0, noteDuration = 0;
     int wholenote = 60000 * 4 / tempo;
-    for (int i = 0; i < notes.size()/2; i+=2) {
+    for (int i = 0; i < notes.size(); i+=2) {
         divider = notes[i+1];
         if(divider > 0) {
             noteDuration = wholenote/divider;
@@ -43,7 +43,7 @@ void musicplayer::play(vector<float> notes, int tempo, float speed) {
             noteDuration = wholenote/abs(divider);
             noteDuration *= 1.5;
         }
-        _Device.period(1 / (4*notes[i]) );
+        _Device.period(1 / (4*notes[i]));
         _Device = 0.5;
         ThisThread::sleep_for(noteDuration * speed);
     }
@@ -89,7 +89,25 @@ void musicplayer::playHarryPotter() {
 
 void musicplayer::playStarWars() {
     starWars = {
-        
+        NT[A][1], 8, NT[A][1], 8, NT[A][1], 8,
+        NT[F][1], 4, NT[C][2], 4, NT[A][1], 8,
+        NT[F][1], 4, NT[C][2], 4, NT[A][1], 8,
+        NT[E][2], 8, NT[E][2], 8, NT[E][2], 8,
+        NT[F][2], 4, NT[C][2], 4, NT[Gs][1], 8,
+        NT[F][1], 4, NT[C][2], 4, NT[A][1], 16,
+        NT[A][2], 8, NT[A][1], 4, NT[A][1], 4,
+        NT[A][2], 8, NT[Gs][2], 4, NT[G][2], 4,
+        NT[Fs][2], 2, NT[F][2], 2, NT[Fs][2], 2,
+        NT[Bb][1], 2, NT[Eb][2], 8, NT[D][2], 4,
+        NT[Cs][2], 4, NT[C][2], 2, NT[B][1], 2,
+        NT[C][2], 2, NT[F][1], 2, NT[Gs][1], 8,
+        NT[F][1], 4, NT[Gs][1], 4, NT[C][2], 8,
+        NT[A][1], 4, NT[C][2], 4, NT[E][2], 16,
+        NT[A][2], 8, NT[A][1], 4, NT[A][1], 4,
+        NT[A][2], 8, NT[Gs][2], 4, NT[G][2], 4,
+        NT[Fs][2], 2, NT[F][2], 2, NT[Fs][2], 2,
+        NT[Bb][1], 2, NT[Eb][2], 8, NT[D][2], 4,
+        NT[Cs][2], 4
     };
-    play(starWars, 157, 0.1);
+    play(starWars, 91, 0.1);
 }
