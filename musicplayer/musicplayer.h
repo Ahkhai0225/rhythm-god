@@ -12,5 +12,6 @@ class musicplayer {
         void play(vector<float> notes, int song, int tempo, float speed);
         void playHarryPotter();
         void playStarWars();
+        void playFurElise();
         PwmOut _Device;
 };
