@@ -2,11 +2,20 @@
 #include "musicplayer.h"
 #include <vector>
 
+BusOut ledrow1(p5, p6, p7);
+BusOut ledrow2(p8, p9, p10);
+BusOut ledrow3(p11, p12, p13);
 enum noteNames {C, Cs, D, Eb, E, F, Fs, G, Gs, A, Bb, B};
 float NT[12][9] = { 
     {16.35}, {17.32}, {18.35}, {19.45}, {20.60}, {21.83},    
     {23.12}, {24.5}, {25.96}, {27.5}, {29.14}, {30.87}
 };
+
+float harryPotterled[] = {
+    0b000, 0b000, 0b100, 0b010, 0b001, 0b010, 0b100, 0b001, 0b100, 0b010, 0b001, 0b100, 0b010, 0b100, 0b001, 0b010, 
+    0b001, 0b100, 0b010, 0b100, 0b010, 0b100, 0b001, 0b100, 0b010, 0b100, 0b001, 0b100, 0b010, 0b100, 0b100, 0b001,
+    0b010, 0b100, 0b001, 0b010, 0b100, 0b010, 0b100, 0b001, 0b100, 0b010, 0b100, 0b001, 0b001, 0b010, 0b100, 0b000, 
+    0b010, 0b100, 0b001, 0b100, 0b010, 0b100, 0b001, 0b100, 0b010, 0b010, 0b100, 0b001, 0b100, 0b010, 0b100 };
 
 vector<float> harryPotter, starWars;
 
@@ -31,7 +40,7 @@ void musicplayer::selectSong(int song) {
     }
 }
 
-void musicplayer::play(vector<float> notes, int tempo, float speed) {
+void musicplayer::play(vector<float> notes, int song, int tempo, float speed) {
     int divider = 0, noteDuration = 0;
     int wholenote = 60000 * 4 / tempo;
     for (int i = 0; i < notes.size(); i+=2) {
@@ -45,13 +54,19 @@ void musicplayer::play(vector<float> notes, int tempo, float speed) {
         }
         _Device.period(1 / (4*notes[i]));
         _Device = 0.5;
+        ledrow1 = harryPotterled[i/2 + 2];
+        ledrow2 = harryPotterled[i/2 + 1];
+        ledrow3 = harryPotterled[i/2];
         ThisThread::sleep_for(noteDuration * speed);
+        ledrow1 = 0000;
+        ledrow2 = 0000;
+        ledrow3 = 0000;
     }
 }
 
 void musicplayer::playHarryPotter() {
     harryPotter = {
-        0, 2, NT[D][3], 4,
+        0, 2, 0, 2, NT[D][3], 4,
         NT[G][3], -4, NT[Bb][3], 8, NT[A][3], 4,
         NT[G][3], 2, NT[D][4], 4,
         NT[C][4], -2,
@@ -84,7 +99,7 @@ void musicplayer::playHarryPotter() {
         NT[Cs][3], 2, NT[Bb][3], 4,
         NT[G][3], -1, 0, 4
     };
-    play(harryPotter, 157, 0.1);
+    play(harryPotter, 1, 157, 0.1);
 }
 
 void musicplayer::playStarWars() {
@@ -109,5 +124,5 @@ void musicplayer::playStarWars() {
         NT[Bb][1], 2, NT[Eb][2], 8, NT[D][2], 4,
         NT[Cs][2], 4, 0, 4
     };
-    play(starWars, 91, 0.1);
+    play(starWars, 2, 91, 0.1);
 }
