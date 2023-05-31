@@ -11,9 +11,8 @@ class musicplayer {
         void selectSong(int song);
     private:
         void play(vector<float> notes, int beatmap, int tempo, float speed);
-        void playHarryPotter(int beatmap);
-        void playCanon(int beatmap);
-        void playFurElise(int beatmap);
         void playPinkPanther(int beatmap);
+        void playHarryPotter(int beatmap);
+        void playFurElise(int beatmap);
         PwmOut _Device;
 };

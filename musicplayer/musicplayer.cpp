@@ -34,16 +34,13 @@ musicplayer::musicplayer(PinName pin) : _Device(pin) {
 void musicplayer::selectSong(int song) {
     switch (song) {
         case 1:
-            playHarryPotter(song);
+            playPinkPanther(song);
             break;
         case 2:
-            playCanon(song);
+            playHarryPotter(song);
             break;
         case 3:
             playFurElise(song);
-            break;
-        case 4:
-            playPinkPanther(song);
             break;
         default:
             break;
@@ -74,6 +71,36 @@ void musicplayer::play(vector<float> notes, int beatmap, int tempo, float speed)
     }
 }
 
+void musicplayer::playPinkPanther(int beatmap) {
+    pinkPanther = {
+        0,         2,   0,         4,   0,         8,   NT[Eb][4], 8,
+        NT[E][4],  -4,  0,         8,   NT[Fs][4], 8,   NT[G][4],  -4,
+        0,         8,   NT[Eb][4], 8,   NT[E][4],  -8,  NT[Fs][4], 8,
+        NT[G][4],  -8,  NT[C][5],  8,   NT[B][4],  -8,  NT[E][4],  8,
+        NT[G][4],  -8,  NT[B][4],  8,   NT[Bb][4], 2,   NT[A][4],  -16,
+        NT[G][4],  -16, NT[E][4],  -16, NT[D][4],  -16, NT[E][4],  2,
+        0,         4,   0,         8,   NT[Eb][4], 4,
+        NT[E][4],  -4,  0,         8,   NT[Fs][4], 8,   NT[G][4],  -4,
+        0,         8,   NT[Eb][4], 8,   NT[E][4],  -8,  NT[Fs][4], 8,
+        NT[G][4],  -8,  NT[C][5],  8,   NT[B][4],  -8,  NT[G][4],  8,
+        NT[B][4],  -8,  NT[E][5],  8,   NT[Eb][5], 1,   NT[D][5],  2,
+        0,         4,   0,         8,   NT[Eb][4], 8,   NT[E][4],  -4,
+        0,         8,   NT[Fs][4], 8,   NT[G][4],  -4,  0,         8,
+        NT[Eb][4], 8,   NT[E][4],  -8,  NT[Fs][4], 8,   NT[G][4],  -8,
+        NT[C][5],  8,   NT[B][4],  -8,  NT[E][4],  8,   NT[G][4],  -8,
+        NT[B][4],  8,
+        NT[Bb][4], 2,   NT[A][4],  -16, NT[G][4],  -16, NT[E][4],  -16,
+        NT[D][4],  -16, NT[E][4],  -4,  0,         4,   0,         4,
+        NT[E][5],  -8,  NT[D][5],  8,   NT[B][4],  -8,  NT[A][4],  8,
+        NT[G][4],  -8,  NT[E][4],  -8,  NT[Bb][4], 16,  NT[A][4],  -8,
+        NT[Bb][4], 16,  NT[A][4],  -8,  NT[Bb][4], 16,  NT[A][4],  -8,
+        NT[Bb][4], 16,  NT[A][4],  -8,  NT[G][4],  -16, NT[E][4],  -16,
+        NT[D][4],  -16, NT[E][4],  16,  NT[E][4],  16,  NT[E][4],  2,
+        0, 4
+    };
+    play(pinkPanther, beatmap, 120, 0.1);
+}
+
 void musicplayer::playHarryPotter(int beatmap) {
     harryPotter = {
         0,         2,  0,         2,  NT[D][3],  4,  NT[G][3],  -4, NT[Bb][3], 8,
@@ -91,37 +118,6 @@ void musicplayer::playHarryPotter(int beatmap) {
         NT[Cs][3], 2,  NT[Bb][3], 4,  NT[G][3],  -1, 0,         4
     };
     play(harryPotter, beatmap, 157, 0.1);
-}
-
-void musicplayer::playCanon(int beatmap) {
-    canonInD = {
-        NT[Fs][4], 2, NT[E][4],  2, NT[D][4],  2, NT[Cs][4], 2, NT[B][3],  2,
-        NT[A][3],  2, NT[B][3],  2, NT[Cs][4], 2, NT[Fs][4], 2, NT[E][4],  2,
-        NT[D][4],  2, NT[Cs][4], 2, NT[B][3],  2, NT[A][3],  2, NT[B][3],  2,
-        NT[Cs][4], 2, NT[D][4],  2, NT[Cs][4], 2, NT[B][3],  2, NT[A][3],  2,
-        NT[G][3],  2, NT[Fs][3], 2, NT[G][3],  2, NT[A][3],  2, NT[D][4],  4,
-        NT[Fs][4], 8, NT[G][4],  8, NT[A][4],  4, NT[Fs][4], 8, NT[G][4],  8,
-        NT[A][4],  4, NT[B][3],  8, NT[Cs][4], 8, NT[D][4],  8, NT[E][4],  8,
-        NT[Fs][4], 8, NT[G][4],  8, NT[Fs][4], 4, NT[D][4],  8, NT[E][4],  8,
-        NT[Fs][4], 4, NT[Fs][3], 8, NT[G][3],  8, NT[A][3],  8, NT[G][3],  8,
-        NT[Fs][3], 8, NT[G][3],  8, NT[A][3],  2, NT[G][3],  4, NT[B][3],  8,
-        NT[A][3],  8, NT[G][3],  4, NT[Fs][3], 8, NT[E][3],  8, NT[Fs][3], 4,
-        NT[D][3],  8, NT[E][3],  8, NT[Fs][3], 8, NT[G][3],  8, NT[A][3],  8,
-        NT[B][3],  8, NT[G][3],  4, NT[B][3],  8, NT[A][3],  8, NT[B][3],  4,
-        NT[Cs][4], 8, NT[D][4],  8, NT[A][3],  8, NT[B][3],  8, NT[Cs][4], 8,
-        NT[D][4],  8, NT[E][4],  8, NT[Fs][4], 8, NT[G][4],  8, NT[A][4],  2,
-        NT[A][4],  4, NT[Fs][4], 8, NT[G][4],  8, NT[A][4],  4, NT[Fs][4], 8,
-        NT[G][4],  8, NT[A][4],  8, NT[A][3],  8, NT[B][3],  8, NT[Cs][4], 8,
-        NT[D][4],  8, NT[E][4],  8, NT[Fs][4], 8, NT[G][4],  8, NT[Fs][4], 4,
-        NT[D][4],  8, NT[E][4],  8, NT[Fs][4], 8, NT[Cs][4], 8, NT[A][3],  8,
-        NT[A][3],  8, NT[Cs][4], 4, NT[B][3],  4, NT[D][4],  8, NT[Cs][4], 8,
-        NT[B][3],  4, NT[A][3],  8, NT[G][3],  8, NT[A][3],  4, NT[D][3],  8,
-        NT[E][3],  8, NT[Fs][3], 8, NT[G][3],  8, NT[A][3],  8, NT[B][3],  4,
-        NT[G][3],  4, NT[B][3],  8, NT[A][3],  8, NT[B][3],  4, NT[Cs][4], 8,
-        NT[D][4],  8, NT[A][3],  8, NT[B][3],  8, NT[Cs][4], 8, NT[D][4],  8,
-        NT[E][4],  8, NT[Fs][4], 8, NT[G][4],  8, NT[A][4],  2, 0,         4
-    };
-    play(canonInD, beatmap, 100, 0.1);
 }
 
 void musicplayer::playFurElise(int beatmap) {
@@ -165,34 +161,4 @@ void musicplayer::playFurElise(int beatmap) {
         0,         16
     };
     play(furElise, beatmap, 80, 0.2);
-}
-
-void musicplayer::playPinkPanther(int beatmap) {
-    pinkPanther = {
-        0,         2,   0,         4,   0,         8,   NT[Eb][4], 8,
-        NT[E][4],  -4,  0,         8,   NT[Fs][4], 8,   NT[G][4],  -4,
-        0,         8,   NT[Eb][4], 8,   NT[E][4],  -8,  NT[Fs][4], 8,
-        NT[G][4],  -8,  NT[C][5],  8,   NT[B][4],  -8,  NT[E][4],  8,
-        NT[G][4],  -8,  NT[B][4],  8,   NT[Bb][4], 2,   NT[A][4],  -16,
-        NT[G][4],  -16, NT[E][4],  -16, NT[D][4],  -16, NT[E][4],  2,
-        0,         4,   0,         8,   NT[Eb][4], 4,
-        NT[E][4],  -4,  0,         8,   NT[Fs][4], 8,   NT[G][4],  -4,
-        0,         8,   NT[Eb][4], 8,   NT[E][4],  -8,  NT[Fs][4], 8,
-        NT[G][4],  -8,  NT[C][5],  8,   NT[B][4],  -8,  NT[G][4],  8,
-        NT[B][4],  -8,  NT[E][5],  8,   NT[Eb][5], 1,   NT[D][5],  2,
-        0,         4,   0,         8,   NT[Eb][4], 8,   NT[E][4],  -4,
-        0,         8,   NT[Fs][4], 8,   NT[G][4],  -4,  0,         8,
-        NT[Eb][4], 8,   NT[E][4],  -8,  NT[Fs][4], 8,   NT[G][4],  -8,
-        NT[C][5],  8,   NT[B][4],  -8,  NT[E][4],  8,   NT[G][4],  -8,
-        NT[B][4],  8,
-        NT[Bb][4], 2,   NT[A][4],  -16, NT[G][4],  -16, NT[E][4],  -16,
-        NT[D][4],  -16, NT[E][4],  -4,  0,         4,   0,         4,
-        NT[E][5],  -8,  NT[D][5],  8,   NT[B][4],  -8,  NT[A][4],  8,
-        NT[G][4],  -8,  NT[E][4],  -8,  NT[Bb][4], 16,  NT[A][4],  -8,
-        NT[Bb][4], 16,  NT[A][4],  -8,  NT[Bb][4], 16,  NT[A][4],  -8,
-        NT[Bb][4], 16,  NT[A][4],  -8,  NT[G][4],  -16, NT[E][4],  -16,
-        NT[D][4],  -16, NT[E][4],  16,  NT[E][4],  16,  NT[E][4],  2,
-        0, 4
-    };
-    play(pinkPanther, beatmap, 120, 0.1);
 }

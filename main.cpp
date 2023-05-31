@@ -26,11 +26,10 @@ int main() {
     // CONDITION FOR CHECKING FOR THE center joystick
         if (joystickCenter) {
             flag = 100;
-            speaker.selectSong(3);
             // Perform an action based on the selected difficulty
             if (difficulty == 0) {
                 // Easy selected
-                speaker.selectSong(4);
+                speaker.selectSong(1);
             } 
             else if (difficulty == 1) {
                 speaker.selectSong(2);
@@ -40,6 +39,7 @@ int main() {
                 speaker.selectSong(3);
                 // Hard selected
             }
+            flag = 0;
         } 
         else {
             if (flag == 0) {
