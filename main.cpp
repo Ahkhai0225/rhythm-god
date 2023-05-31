@@ -26,7 +26,7 @@ int main() {
     if (joystickCenter) {
       flag = 100;
       musicplayer speaker(p26);
-      speaker.selectSong(1);
+      speaker.selectSong(3);
       // Perform an action based on the selected difficulty
       if (difficulty == 0) {
         // Easy selected

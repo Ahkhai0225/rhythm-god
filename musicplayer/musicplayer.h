@@ -3,6 +3,7 @@
 
 extern BusOut ledrow1;
 extern BusOut ledrow2;
+extern Serial pc;
 
 class musicplayer {
     public:
