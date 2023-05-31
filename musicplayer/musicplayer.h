@@ -9,9 +9,9 @@ class musicplayer {
         musicplayer(PinName pin);
         void selectSong(int song);
     private:
-        void play(vector<float> notes, int song, int tempo, float speed);
-        void playHarryPotter();
-        void playStarWars();
-        void playFurElise();
+        void play(vector<float> notes, int beatmap, int tempo, float speed);
+        void playHarryPotter(int beatmap);
+        void playStarWars(int beatmap);
+        void playFurElise(int beatmap);
         PwmOut _Device;
 };

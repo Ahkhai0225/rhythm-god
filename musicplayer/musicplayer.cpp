@@ -11,17 +11,14 @@ float NT[12][9] = {
     {23.12}, {24.5}, {25.96}, {27.5}, {29.14}, {30.87}
 };
 
-<<<<<<< Updated upstream
 float harryPotterled[] = {
     0b000, 0b000, 0b100, 0b010, 0b001, 0b010, 0b100, 0b001, 0b100, 0b010, 0b001, 0b100, 0b010, 0b100, 0b001, 0b010, 
     0b001, 0b100, 0b010, 0b100, 0b010, 0b100, 0b001, 0b100, 0b010, 0b100, 0b001, 0b100, 0b010, 0b100, 0b100, 0b001,
     0b010, 0b100, 0b001, 0b010, 0b100, 0b010, 0b100, 0b001, 0b100, 0b010, 0b100, 0b001, 0b001, 0b010, 0b100, 0b000, 
-    0b010, 0b100, 0b001, 0b100, 0b010, 0b100, 0b001, 0b100, 0b010, 0b010, 0b100, 0b001, 0b100, 0b010, 0b100 };
+    0b010, 0b100, 0b001, 0b100, 0b010, 0b100, 0b001, 0b100, 0b010, 0b010, 0b100, 0b001, 0b100, 0b010, 0b100 
+};
 
-vector<float> harryPotter, starWars;
-=======
 vector<float> harryPotter, starWars, furElise;
->>>>>>> Stashed changes
 
 musicplayer::musicplayer(PinName pin): _Device(pin) { 
     for (int i = 0; i < 12; i++) {
@@ -34,10 +31,13 @@ musicplayer::musicplayer(PinName pin): _Device(pin) {
 void musicplayer::selectSong(int song) {
     switch(song) {
         case 1:
-            playHarryPotter();
+            playHarryPotter(song);
             break;
         case 2:
-            playStarWars();
+            playStarWars(song);
+            break;
+        case 3:
+            playFurElise(song);
             break;
         default:
             break;
@@ -68,7 +68,7 @@ void musicplayer::play(vector<float> notes, int beatmap, int tempo, float speed)
     }
 }
 
-void musicplayer::playHarryPotter() {
+void musicplayer::playHarryPotter(int beatmap) {
     harryPotter = {
         0, 2, 0, 2, NT[D][3], 4,
         NT[G][3], -4, NT[Bb][3], 8, NT[A][3], 4,
@@ -103,10 +103,10 @@ void musicplayer::playHarryPotter() {
         NT[Cs][3], 2, NT[Bb][3], 4,
         NT[G][3], -1, 0, 4
     };
-    play(harryPotter, 1, 157, 0.1);
+    play(harryPotter, beatmap, 157, 0.1);
 }
 
-void musicplayer::playStarWars() {
+void musicplayer::playStarWars(int beatmap) {
     starWars = {
         NT[A][1], 8, NT[A][1], 8, NT[A][1], 8,
         NT[F][1], 2, NT[C][2], 2, NT[A][1], 8,
@@ -128,13 +128,10 @@ void musicplayer::playStarWars() {
         NT[Bb][1], 4, NT[Eb][2], -8, NT[D][2], 16,
         NT[Cs][2], -4
     };
-<<<<<<< Updated upstream
-    play(starWars, 2, 91, 0.1);
-=======
-    play(starWars, 108, 0.1);
+    play(starWars, beatmap, 91, 0.1);
 }
 
-void musicplayer::playFurElise() {
+void musicplayer::playFurElise(int beatmap) {
     furElise = {
         NT[E][5], 16, NT[Eb][5], 16,
         NT[E][5], 16, NT[Eb][5], 16, NT[E][5], 16, NT[B][4], 16, NT[D][5], 16, NT[C][5], 16,
@@ -288,6 +285,5 @@ void musicplayer::playFurElise() {
         NT[B][4], -8, NT[E][4], 16, NT[C][5], 16, NT[B][4], 16,
         NT[A][4] , -4, 0, 4
     };
-    play(furElise, 80, 0.1);
->>>>>>> Stashed changes
+    play(furElise, beatmap, 80, 0.1);
 }
