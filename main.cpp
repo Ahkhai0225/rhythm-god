@@ -33,7 +33,6 @@ int main() {
             } 
             else if (difficulty == 1) {
                 speaker.selectSong(2);
-                pc.printf("Score: %d", scoree);
                 // Medium selected
             } 
             else if (difficulty == 2) {

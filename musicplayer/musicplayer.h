@@ -4,7 +4,6 @@
 extern BusOut ledrow1;
 extern BusOut ledrow2;
 extern Serial pc;
-extern int scoree;
 
 class musicplayer {
     public:
