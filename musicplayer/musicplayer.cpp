@@ -1,10 +1,16 @@
 #include "musicplayer.h"
 #include "mbed.h"
 #include <vector>
+#include <stdlib.h>
+#include <chrono>
 
 BusOut ledrow1(p30, p29, p28);
 BusOut ledrow2(p27, p22, p21);
 BusOut ledrow3(p20, p18, p17);
+DigitalIn but1(p9);
+DigitalIn but2(p10);
+DigitalIn but3(p12);
+int scoree = 0;
 
 enum noteNames { C, Cs, D, Eb, E, F, Fs, G, Gs, A, Bb, B };
 float NT[12][9] = {
@@ -50,8 +56,9 @@ void musicplayer::selectSong(int song) {
 void musicplayer::play(vector<float> notes, int beatmap, int tempo, float speed) {
     int divider = 0, noteDuration = 0;
     int wholenote = 60000 * 4 / tempo;
+    int a = 0;
+    Timer timer;
     for (int i = 0; i < notes.size(); i += 2) {
-        pc.printf("%f\t", notes[i]);
         divider = notes[i + 1];
         if (divider > 0) {
             noteDuration = wholenote / divider;
@@ -64,10 +71,28 @@ void musicplayer::play(vector<float> notes, int beatmap, int tempo, float speed)
         ledrow1 = harryPotterled[i / 2 + 2];
         ledrow2 = harryPotterled[i / 2 + 1];
         ledrow3 = harryPotterled[i / 2];
-        ThisThread::sleep_for(noteDuration * speed);
+        timer.start();
+        while (timer.read_ms()/10 < noteDuration*speed){
+                if(ledrow3.read()== 0b100 && but1==1 && a == 0) {
+                    scoree++;
+                    a++;
+                }
+                if(ledrow3.read()== 0b010 && but2==1 && a == 0) {
+                    scoree++;
+                    a++;
+                }
+                if(ledrow3.read()== 0b001 && but3==1 && a == 0) {
+                    scoree++;
+                    a++;
+                    
+                }
+        }
+        timer.stop();
+        timer.reset();
         ledrow1 = 0000;
         ledrow2 = 0000;
         ledrow3 = 0000;
+        a = 0;
     }
 }
 
