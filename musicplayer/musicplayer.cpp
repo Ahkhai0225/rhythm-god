@@ -1,30 +1,14 @@
 #include "musicplayer.h"
 #include "mbed.h"
 #include <vector>
-#include <stdlib.h>
-#include <chrono>
+#include "light.h"
+#include "switch.h"
 
-BusOut ledrow1(p30, p29, p28);
-BusOut ledrow2(p27, p22, p21);
-BusOut ledrow3(p20, p18, p17);
-DigitalIn but1(p9);
-DigitalIn but2(p10);
-DigitalIn but3(p12);
-int scoree = 0;
 
 enum noteNames { C, Cs, D, Eb, E, F, Fs, G, Gs, A, Bb, B };
 float NT[12][9] = {
     {16.35}, {17.32}, {18.35}, {19.45}, {20.60}, {21.83},
     {23.12}, {24.5},  {25.96}, {27.5},  {29.14}, {30.87}
-};
-
-float harryPotterled[] = {
-    0b000, 0b000, 0b100, 0b010, 0b001, 0b010, 0b100, 0b001, 0b100, 0b010, 0b001,
-    0b100, 0b010, 0b100, 0b001, 0b010, 0b001, 0b100, 0b010, 0b100, 0b010, 0b100,
-    0b001, 0b100, 0b010, 0b100, 0b001, 0b100, 0b010, 0b100, 0b100, 0b001, 0b010,
-    0b100, 0b001, 0b010, 0b100, 0b010, 0b100, 0b001, 0b100, 0b010, 0b100, 0b001,
-    0b001, 0b010, 0b100, 0b000, 0b010, 0b100, 0b001, 0b100, 0b010, 0b100, 0b001,
-    0b100, 0b010, 0b010, 0b100, 0b001, 0b100, 0b010, 0b100
 };
 
 vector<float> harryPotter, canonInD, furElise, pinkPanther;
@@ -54,6 +38,7 @@ void musicplayer::selectSong(int song) {
 }
 
 void musicplayer::play(vector<float> notes, int beatmap, int tempo, float speed) {
+    scoree = 0;
     int divider = 0, noteDuration = 0;
     int wholenote = 60000 * 4 / tempo;
     int a = 0;
@@ -68,31 +53,9 @@ void musicplayer::play(vector<float> notes, int beatmap, int tempo, float speed)
         }
         _Device.period(1 / (4 * notes[i]));
         _Device = 0.5;
-        ledrow1 = harryPotterled[i / 2 + 2];
-        ledrow2 = harryPotterled[i / 2 + 1];
-        ledrow3 = harryPotterled[i / 2];
-        timer.start();
-        while (timer.read_ms()/10 < noteDuration*speed){
-                if(ledrow3.read()== 0b100 && but1==1 && a == 0) {
-                    scoree++;
-                    a++;
-                }
-                if(ledrow3.read()== 0b010 && but2==1 && a == 0) {
-                    scoree++;
-                    a++;
-                }
-                if(ledrow3.read()== 0b001 && but3==1 && a == 0) {
-                    scoree++;
-                    a++;
-                    
-                }
-        }
-        timer.stop();
-        timer.reset();
-        ledrow1 = 0000;
-        ledrow2 = 0000;
-        ledrow3 = 0000;
-        a = 0;
+        songChoice(beatmap, i);
+        switchIndicator(noteDuration, speed);
+        defaultled();
     }
 }
 
@@ -123,7 +86,7 @@ void musicplayer::playPinkPanther(int beatmap) {
         NT[D][4],  -16, NT[E][4],  16,  NT[E][4],  16,  NT[E][4],  2,
         0, 4
     };
-    play(pinkPanther, beatmap, 120, 0.1);
+    play(pinkPanther, 1, 120, 0.1);
 }
 
 void musicplayer::playHarryPotter(int beatmap) {
@@ -142,7 +105,7 @@ void musicplayer::playHarryPotter(int beatmap) {
         NT[Eb][4], 2,  NT[B][3],  4,  NT[Eb][4], -4, NT[D][4],  8,  NT[Cs][4], 4,
         NT[Cs][3], 2,  NT[Bb][3], 4,  NT[G][3],  -1, 0,         4
     };
-    play(harryPotter, beatmap, 157, 0.1);
+    play(harryPotter, 2, 157, 0.1);
 }
 
 void musicplayer::playFurElise(int beatmap) {
@@ -185,5 +148,5 @@ void musicplayer::playFurElise(int beatmap) {
         NT[E][4],  16, NT[C][5],  16, NT[B][4],  16, NT[A][4],  8,
         0,         16
     };
-    play(furElise, beatmap, 80, 0.2);
+    play(furElise, 3, 80, 0.2);
 }

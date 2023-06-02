@@ -1,6 +1,7 @@
 #include "C12832.h"
 #include "mbed.h"
 #include "musicplayer.h"
+#include "switch.h"
 
 // PwmOut speaker(p26);
 AnalogIn pot1(p19);
