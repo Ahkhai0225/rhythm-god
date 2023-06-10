@@ -3,6 +3,7 @@
 #include "musicplayer.h"
 #include "switch.h"
 
+
 // PwmOut speaker(p26);
 AnalogIn pot1(p19);
 DigitalIn joystickCenter(p14);
@@ -23,6 +24,7 @@ int main() {
     int difficulty = 0; // 0 - Easy, 1 - Medium, 2 - Hard
     lcd.cls();
     musicplayer speaker(p26);
+
     while (1) {
     // CONDITION FOR CHECKING FOR THE center joystick
         if (joystickCenter) {
@@ -30,14 +32,17 @@ int main() {
             // Perform an action based on the selected difficulty
             if (difficulty == 0) {
                 // Easy selected
+                speaker.timerStart();
                 speaker.selectSong(1);
             } 
             else if (difficulty == 1) {
+                speaker.timerStart();
                 speaker.selectSong(2);
                 pc.printf("Score: %d", scoree);
                 // Medium selected
             } 
             else if (difficulty == 2) {
+                speaker.timerStart();
                 speaker.selectSong(3);
                 // Hard selected
             }

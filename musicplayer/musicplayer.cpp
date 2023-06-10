@@ -4,12 +4,21 @@
 #include "light.h"
 #include "switch.h"
 
+BusOut display(p9,p10,p12,p13,p14,p15,p16);
 
 enum noteNames { C, Cs, D, Eb, E, F, Fs, G, Gs, A, Bb, B };
 float NT[12][9] = {
     {16.35}, {17.32}, {18.35}, {19.45}, {20.60}, {21.83},
     {23.12}, {24.5},  {25.96}, {27.5},  {29.14}, {30.87}
 };
+
+const int segmentValues[4] = {
+    0b0111111,  // 0
+    0b0000110,  // 1
+    0b1011011,  // 2
+    0b1001111,  // 3
+};
+
 
 vector<float> harryPotter, canonInD, furElise, pinkPanther;
 
@@ -37,6 +46,16 @@ void musicplayer::selectSong(int song) {
     }
 }
 
+void musicplayer::timerStart() {
+    int countdown = 3;
+        while (countdown>1){
+            display = segmentValues[countdown];
+            countdown = countdown-1;
+            wait_us(1000000);
+        }
+        display = segmentValues[countdown];
+}
+
 void musicplayer::play(vector<float> notes, int beatmap, int tempo, float speed) {
     scoree = 0;
     int divider = 0, noteDuration = 0;
@@ -60,6 +79,7 @@ void musicplayer::play(vector<float> notes, int beatmap, int tempo, float speed)
 }
 
 void musicplayer::playPinkPanther(int beatmap) {
+    
     pinkPanther = {
         0,         2,   0,         4,   0,         8,   NT[Eb][4], 8,
         NT[E][4],  -4,  0,         8,   NT[Fs][4], 8,   NT[G][4],  -4,

@@ -7,6 +7,7 @@ class musicplayer {
     public:
         musicplayer(PinName pin);
         void selectSong(int song);
+        void timerStart();
     private:
         void play(vector<float> notes, int beatmap, int tempo, float speed);
         void playPinkPanther(int beatmap);
