@@ -1,9 +1,10 @@
 #include "mbed.h"
 #include "light.h"
 
-DigitalIn but1(p9);
-DigitalIn but2(p10);
-DigitalIn but3(p12);
+DigitalIn but1(p23);
+DigitalIn but2(p24);
+DigitalIn but3(p25);
+
 int scoree;
 int a = 0;
 Timer timer;

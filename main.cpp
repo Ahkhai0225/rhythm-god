@@ -12,6 +12,7 @@ BusIn joy(p13, p16);
 BusOut leds(LED1, LED2, LED3, LED4);
 Serial pc(USBTX, USBRX);
 
+
 int main() {
     int i = 0;
     int dimX = 120;
@@ -24,7 +25,7 @@ int main() {
     int difficulty = 0; // 0 - Easy, 1 - Medium, 2 - Hard
     lcd.cls();
     musicplayer speaker(p26);
-
+    
     while (1) {
     // CONDITION FOR CHECKING FOR THE center joystick
         if (joystickCenter) {
@@ -43,7 +44,7 @@ int main() {
             } 
             else if (difficulty == 2) {
                 speaker.timerStart();
-                speaker.selectSong(3);
+                 speaker.selectSong(3);
                 // Hard selected
             }
             flag = 0;
@@ -102,7 +103,7 @@ int main() {
             lcd.printf("Hard");
 
             lcd.locate(0, 22);
-            lcd.printf("%d", score);
+            lcd.printf("%d", scoree);
             ThisThread::sleep_for(2 * 10);
         }
     }
