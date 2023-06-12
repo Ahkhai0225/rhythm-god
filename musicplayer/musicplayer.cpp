@@ -57,7 +57,7 @@ void musicplayer::timerStart() {
 }
 
 void musicplayer::play(vector<float> notes, int beatmap, int tempo, float speed) {
-    scoree = 0;
+    score = 0;
     int divider = 0, noteDuration = 0;
     int wholenote = 60000 * 4 / tempo;
     int a = 0;

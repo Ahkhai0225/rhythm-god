@@ -39,7 +39,7 @@ int main() {
             else if (difficulty == 1) {
                 speaker.timerStart();
                 speaker.selectSong(2);
-                pc.printf("Score: %d", scoree);
+                pc.printf("Score: %d", score);
                 // Medium selected
             } 
             else if (difficulty == 2) {
@@ -54,7 +54,6 @@ int main() {
                 leds = joy;
                 // moving arrow right
                 if (joy == 0x2) {
-                    pc.printf("Hello");
                     // Update difficulty based on the arrow's position
                     if (i == 96) {
                         i = 0;
@@ -73,7 +72,6 @@ int main() {
                 // moving arrow left
                 else if (joy == 0x1) {
                     // Update difficulty based on the arrow's position
-                    pc.printf("Hi");
                     if (i == 0) {
                         i = 96;
                         difficulty = 2; // Hard
@@ -103,7 +101,7 @@ int main() {
             lcd.printf("Hard");
 
             lcd.locate(0, 22);
-            lcd.printf("%d", scoree);
+            lcd.printf("%d", score);
             ThisThread::sleep_for(2 * 10);
         }
     }
