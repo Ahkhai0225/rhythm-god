@@ -1,3 +1,6 @@
+#ifndef MUSIC_H
+#define MUSIC_H
+
 #include "mbed.h"
 #include <vector>
 
@@ -15,3 +18,4 @@ class musicplayer {
         void playFurElise(int beatmap);
         PwmOut _Device;
 };
+#endif
