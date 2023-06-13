@@ -11,6 +11,7 @@ C12832 lcd(p5, p7, p6, p8, p11);
 BusIn joy(p13, p16);
 BusOut leds(LED1, LED2, LED3, LED4);
 Serial pc(USBTX, USBRX);
+PwmOut servo(p21);
 
 int main() {
     int i = 0;
@@ -35,24 +36,36 @@ int main() {
                 lcd.cls();
                 lcd.locate(0, 3);
                 lcd.printf("Now Playing Pink Panther...");
+                servo.period_ms(20);
+                servo.pulsewidth_ms(1);
                 speaker.timerStart();
                 speaker.selectSong(1);
+                servo.period_ms(20);
+                servo.pulsewidth_ms(2);
             } 
             else if (difficulty == 1) {
                 // Medium selected
                 lcd.cls();
                 lcd.locate(0, 3);
                 lcd.printf("Now Playing Harry Potter...");
+                servo.period_ms(20);
+                servo.pulsewidth_ms(1);
                 speaker.timerStart();
                 speaker.selectSong(2);
+                servo.period_ms(20);
+                servo.pulsewidth_ms(2);
             } 
             else if (difficulty == 2) {
                 // Hard selected
                 lcd.cls();
                 lcd.locate(0, 3);
                 lcd.printf("Now Playing Fur Elise...");
+                servo.period_ms(20);
+                servo.pulsewidth_ms(1);
                 speaker.timerStart();
-                 speaker.selectSong(3);
+                speaker.selectSong(3);
+                servo.period_ms(20);
+                servo.pulsewidth_ms(2);
             }
             flag = 0;
             lcd.cls();
