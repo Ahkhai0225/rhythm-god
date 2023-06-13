@@ -13,7 +13,7 @@ float NT[12][9] = {
 };
 
 const int segmentValues[4] = {
-    0b0111111,  // 0
+    0b0000000,  // - (Start Game)
     0b0000110,  // 1
     0b1011011,  // 2
     0b1001111,  // 3
@@ -48,7 +48,7 @@ void musicplayer::selectSong(int song) {
 
 void musicplayer::timerStart() {
     int countdown = 3;
-        while (countdown>1){
+        while (countdown>0){
             display = segmentValues[countdown];
             countdown = countdown-1;
             wait_us(1000000);

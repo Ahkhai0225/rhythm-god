@@ -8,4 +8,3 @@ extern int score;
 extern Timer timer;
 
 void switchIndicator(int noteDuration, float speed);
-float showScore(int score);

@@ -12,13 +12,6 @@ BusIn joy(p13, p16);
 BusOut leds(LED1, LED2, LED3, LED4);
 Serial pc(USBTX, USBRX);
 
-int score = 0;
-void updateScore() {
-    lcd.locate(0, 22);
-    lcd.printf("Score: %d", score);
-}
-
-
 int main() {
     int i = 0;
     int dimX = 120;
@@ -27,6 +20,7 @@ int main() {
     lcd.printf("welcome to rhythm-god game");
     ThisThread::sleep_for(2 * 100);
     int flag = 0;
+    int score = 0;
     int difficulty = 0; // 0 - Easy, 1 - Medium, 2 - Hard
     lcd.cls();
     musicplayer speaker(p26);
@@ -61,6 +55,7 @@ int main() {
                  speaker.selectSong(3);
             }
             flag = 0;
+            lcd.cls();
         } 
         else {
             if (flag == 0) {
@@ -113,7 +108,6 @@ int main() {
             lcd.locate(106, 0);
             lcd.printf("Hard");
 
-            updateScore();
             ThisThread::sleep_for(2 * 10);
         }
     }
