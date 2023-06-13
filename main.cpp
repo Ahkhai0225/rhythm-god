@@ -12,6 +12,12 @@ BusIn joy(p13, p16);
 BusOut leds(LED1, LED2, LED3, LED4);
 Serial pc(USBTX, USBRX);
 
+int score = 0;
+void updateScore() {
+    lcd.locate(0, 22);
+    lcd.printf("Score: %d", score);
+}
+
 
 int main() {
     int i = 0;
@@ -21,7 +27,6 @@ int main() {
     lcd.printf("welcome to rhythm-god game");
     ThisThread::sleep_for(2 * 100);
     int flag = 0;
-    int score = 0;
     int difficulty = 0; // 0 - Easy, 1 - Medium, 2 - Hard
     lcd.cls();
     musicplayer speaker(p26);
@@ -33,19 +38,27 @@ int main() {
             // Perform an action based on the selected difficulty
             if (difficulty == 0) {
                 // Easy selected
+                lcd.cls();
+                lcd.locate(0, 3);
+                lcd.printf("Now Playing Pink Panther...");
                 speaker.timerStart();
                 speaker.selectSong(1);
             } 
             else if (difficulty == 1) {
+                // Medium selected
+                lcd.cls();
+                lcd.locate(0, 3);
+                lcd.printf("Now Playing Harry Potter...");
                 speaker.timerStart();
                 speaker.selectSong(2);
-                pc.printf("Score: %d", score);
-                // Medium selected
             } 
             else if (difficulty == 2) {
+                // Hard selected
+                lcd.cls();
+                lcd.locate(0, 3);
+                lcd.printf("Now Playing Fur Elise...");
                 speaker.timerStart();
                  speaker.selectSong(3);
-                // Hard selected
             }
             flag = 0;
         } 
@@ -100,8 +113,7 @@ int main() {
             lcd.locate(106, 0);
             lcd.printf("Hard");
 
-            lcd.locate(0, 22);
-            lcd.printf("%d", score);
+            updateScore();
             ThisThread::sleep_for(2 * 10);
         }
     }

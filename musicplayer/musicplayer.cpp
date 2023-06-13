@@ -20,7 +20,7 @@ const int segmentValues[4] = {
 };
 
 
-vector<float> harryPotter, canonInD, furElise, pinkPanther;
+vector<float> harryPotter, furElise, pinkPanther;
 
 musicplayer::musicplayer(PinName pin) : _Device(pin) {
     for (int i = 0; i < 12; i++) {
