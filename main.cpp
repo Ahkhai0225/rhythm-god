@@ -20,7 +20,6 @@ int main() {
     lcd.printf("welcome to rhythm-god game");
     ThisThread::sleep_for(2 * 100);
     int flag = 0;
-    int score = 0;
     int difficulty = 0; // 0 - Easy, 1 - Medium, 2 - Hard
     lcd.cls();
     musicplayer speaker(p26);
@@ -71,8 +70,10 @@ int main() {
             }
             flag = 0;
             lcd.cls();
-            lcd.locate(0, 22);
-            lcd.printf("Last Score: %d", score);
+            lcd.locate(0, 3);
+            lcd.printf("Final Score: %d", score);
+            ThisThread::sleep_for(5 * 100);
+            lcd.cls();
         } 
         else {
             if (flag == 0) {
