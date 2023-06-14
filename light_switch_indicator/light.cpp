@@ -1,7 +1,7 @@
 #include "mbed.h"
 
 BusOut ledrow1(p30, p29, p28);
-BusOut ledrow2(p27, p22, p19);
+BusOut ledrow2(p27, p21, p19);
 BusOut ledrow3(p20, p18, p17);
 
 float pinkPantherled[]{
