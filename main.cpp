@@ -3,12 +3,9 @@
 #include "musicplayer.h"
 #include "switch.h"
 
-
-// PwmOut speaker(p26);
 DigitalIn joystickCenter(p14);
 C12832 lcd(p5, p7, p6, p8, p11);
 BusIn joy(p13, p16);
-BusOut leds(LED1, LED2, LED3, LED4);
 Serial pc(USBTX, USBRX);
 PwmOut servo(p22);
 
@@ -77,7 +74,6 @@ int main() {
         } 
         else {
             if (flag == 0) {
-                leds = joy;
                 // moving arrow right
                 if (joy == 0x2) {
                     // Update difficulty based on the arrow's position

@@ -1,10 +1,12 @@
 #include "musicplayer.h"
 #include "mbed.h"
+#include "LM75B.h"
 #include <vector>
 #include "light.h"
 #include "switch.h"
 
 BusOut display(p9,p10,p12,p13,p14,p15,p16);
+LM75B tempSensor(p28, p27);
 
 enum noteNames { C, Cs, D, Eb, E, F, Fs, G, Gs, A, Bb, B };
 float NT[12][9] = {
@@ -63,6 +65,13 @@ void musicplayer::play(vector<float> notes, int beatmap, int tempo, float speed)
     int a = 0;
     Timer timer;
     for (int i = 0; i < notes.size(); i += 2) {
+        if(tempSensor.read() >= 36) {
+            lcd.cls();
+            lcd.locate(0, 3);
+            lcd.printf("OVERHEAT!!!!!!");
+            _Device.period(0);
+            exit(1);
+        }
         divider = notes[i + 1];
         if (divider > 0) {
             noteDuration = wholenote / divider;
@@ -130,7 +139,7 @@ void musicplayer::playHarryPotter(int beatmap) {
 
 void musicplayer::playFurElise(int beatmap) {
     furElise = {
-        NT[E][5],  16, NT[Eb][5], 16, NT[E][5],  16, NT[Eb][5], 16,
+        0, 16, 0, 16, NT[E][5],  16, NT[Eb][5], 16, NT[E][5],  16, NT[Eb][5], 16,
         NT[E][5],  16, NT[B][4],  16, NT[D][5],  16, NT[C][5],  16,
         NT[A][4],  -8, NT[C][4],  16, NT[E][4],  16, NT[A][4],  16,
         NT[B][4],  -8, NT[E][4],  16, NT[Gs][4], 16, NT[B][4],  16,
