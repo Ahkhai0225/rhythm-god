@@ -1,17 +1,16 @@
-#include "C12832.h"
 #include "mbed.h"
 #include "musicplayer.h"
 #include "switch.h"
+#include "C12832.h"
 
 DigitalIn joystickCenter(p14);
-C12832 lcd(p5, p7, p6, p8, p11);
 BusIn joy(p13, p16);
+C12832 lcd(p5, p7, p6, p8, p11);
 Serial pc(USBTX, USBRX);
 PwmOut servo(p22);
 
 int main() {
     int i = 0;
-    int dimX = 120;
     lcd.cls();
     lcd.locate(0, 3);
     lcd.printf("welcome to rhythm-god game");
